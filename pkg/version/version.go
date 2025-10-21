@@ -1,1 +1,3 @@
-package pkg
+package version
+
+var Version = "dev"
