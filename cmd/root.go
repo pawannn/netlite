@@ -75,7 +75,7 @@ func Netlite(cmd *cobra.Command, args []string) {
 }
 
 func Execute() {
-	rootCmd.PersistentFlags().StringVar(&flagIP, "IP", "", "Host to scan")
+	rootCmd.PersistentFlags().StringVar(&flagIP, "host", "", "Host to scan")
 	rootCmd.PersistentFlags().IntVar(&flagStart, "start", 1, "Start port (default 1)")
 	rootCmd.PersistentFlags().IntVar(&flagEnd, "end", 65535, "End port (default 1024)")
 	rootCmd.PersistentFlags().BoolVar(&flagWatch, "watch", false, "Continuously scan every --interval seconds")
