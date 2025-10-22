@@ -16,11 +16,11 @@ type ScanResult struct {
 	Error    string `json:"error,omitempty"`
 }
 
-func ScanRange(start, end, concurrency int) ([]ScanResult, pkg.NetliteErr) {
-	host := "127.0.0.1"
+func ScanRange(host string, start int, end int, concurrency int) ([]ScanResult, pkg.NetliteErr) {
 	if start < 1 {
 		start = 1
 	}
+
 	if end > 65535 {
 		end = 65535
 	}

@@ -26,3 +26,7 @@ func GetIP() (string, NetliteErr) {
 		Error:         nil,
 	}
 }
+
+func IsValidIP(ip string) bool {
+	return net.ParseIP(ip) != nil
+}

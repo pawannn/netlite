@@ -11,6 +11,7 @@ import (
 )
 
 var (
+	flagIP          string
 	flagStart       int
 	flagEnd         int
 	flagWatch       bool
@@ -34,14 +35,24 @@ func Netlite(cmd *cobra.Command, args []string) {
 		pkg.PrintBanner()
 	}
 
-	host, err := pkg.GetIP()
-	if err != pkg.NoErr {
-		log.Fatalf("%s", err.ClientMessage)
+	var host string
+	if flagIP != "" {
+		if !pkg.IsValidIP(flagIP) {
+			fmt.Fprintln(os.Stderr, "Invalid IP")
+			os.Exit(1)
+		}
+		host = flagIP
+	} else {
+		var err pkg.NetliteErr
+		host, err = pkg.GetIP()
+		if err != pkg.NoErr {
+			log.Fatalf("%s", err.ClientMessage)
+		}
 	}
 
 	fmt.Printf("\nNetlite scanning %s ports %d-%d\n\n", host, flagStart, flagEnd)
 
-	results, err := scanner.ScanRange(flagStart, flagEnd, flagConcurrency)
+	results, err := scanner.ScanRange(host, flagStart, flagEnd, flagConcurrency)
 
 	if err != pkg.NoErr {
 		fmt.Fprintf(os.Stderr, "scan error: %v\n", err.ClientMessage)
@@ -64,7 +75,8 @@ func Netlite(cmd *cobra.Command, args []string) {
 }
 
 func Execute() {
-	rootCmd.PersistentFlags().IntVar(&flagStart, "start", 0, "Start port (default 1)")
+	rootCmd.PersistentFlags().StringVar(&flagIP, "IP", "", "Host to scan")
+	rootCmd.PersistentFlags().IntVar(&flagStart, "start", 1, "Start port (default 1)")
 	rootCmd.PersistentFlags().IntVar(&flagEnd, "end", 65535, "End port (default 1024)")
 	rootCmd.PersistentFlags().BoolVar(&flagWatch, "watch", false, "Continuously scan every --interval seconds")
 	rootCmd.PersistentFlags().IntVar(&flagInterval, "interval", 3, "Interval seconds for --watch (default 3)")
