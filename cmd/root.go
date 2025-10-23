@@ -33,7 +33,6 @@ func init() {
 	rootCmd.PersistentFlags().BoolVar(&FlagNoBanner, "no-banner", false, "")
 
 	rootCmd.AddCommand(ScannerCommand)
-	rootCmd.AddCommand(KillCommand)
 	rootCmd.AddCommand(ipinfoCmd)
 
 	rootCmd.CompletionOptions.DisableDefaultCmd = true
