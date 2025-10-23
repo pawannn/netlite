@@ -102,7 +102,7 @@ func RunScan(cmd *cobra.Command, args []string) {
 func init() {
 	ScannerCommand.Flags().StringVarP(&scanHost, "host", "", "", "Host to scan (default: localhost)")
 	ScannerCommand.Flags().IntVarP(&scanStart, "start", "s", pkg.START_RANGE, "Start port (default 1)")
-	ScannerCommand.Flags().IntVarP(&scanEnd, "end", "e", pkg.END_RANGE, "End port (default 1024)")
+	ScannerCommand.Flags().IntVarP(&scanEnd, "end", "e", pkg.END_RANGE, "End port (default 65535)")
 	ScannerCommand.Flags().IntVarP(&scanConcurrency, "concurrency", "c", pkg.CONCURRENCY, "Max concurrent connections (default 200)")
 	ScannerCommand.Flags().BoolVarP(&scanVerbose, "verbose", "v", false, "Verbose output showing closed ports and errors")
 	ScannerCommand.Flags().StringVarP(&scanJSON, "json", "j", "", "Export results to JSON file")
