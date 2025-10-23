@@ -60,7 +60,7 @@ func RunScan(cmd *cobra.Command, args []string) {
 		for _, r := range results {
 			if r.Open {
 				openCount++
-				fmt.Printf("Port %d: OPEN (%s)\n", r.Port, r.Protocol)
+				fmt.Printf("Port %d: OPEN\n", r.Port)
 			} else if scanVerbose {
 				if r.Error != "" {
 					fmt.Printf("Port %d: CLOSED — %s\n", r.Port, r.Error)
