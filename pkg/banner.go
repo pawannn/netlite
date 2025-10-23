@@ -2,7 +2,7 @@ package pkg
 
 import "fmt"
 
-func PrintBanner() {
+func DisplayBanner() {
 	fmt.Print(`
   _   _      _   _ _ _
  | \ | | ___| |_| (_| |_ ___
